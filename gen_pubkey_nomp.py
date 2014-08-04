@@ -5,7 +5,7 @@ from pycoin.encoding import public_pair_to_hash160_sec, hash160_sec_to_bitcoin_a
 from pycoin.networks import address_prefix_for_netcode, alternate_hash_for_netcode
 
 secret = os.urandom(64)
-wallet = Wallet.from_master_secret(bytes(secret), 'BTC')
+wallet = Wallet.from_master_secret(bytes(secret), 'BLC')
 
 sec = public_pair_to_hash160_sec(wallet.public_pair)
 pubkey = ''.join('{:02x}'.format(ord(x)) for x in sec)
