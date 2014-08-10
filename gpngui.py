@@ -231,8 +231,7 @@ Do you want to proceed to configure the available anyways?"""
                             port=rpcport)
                             
                         try:
-                            #conn.importprivkey(wif, "MERGED_NOMP_REWARD_USR_%s" % pubkey, False)
-                            pass
+                            conn.importprivkey(wif, "MERGED_NOMP_REWARD_USR_%s" % pubkey, False)
                         finally:
                             del conn
                     except socket.error:
