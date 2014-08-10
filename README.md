@@ -14,7 +14,7 @@ Generates addresses for:
  * BlakeBitcoin
  * UniversalMolecule
  
-More to come later.
+You can download the binary package to run this utility with a (rather horrible) GUI that has an option to autoconfigure your wallets and includes all the requirements so you don't have to install Python.
  
 Troubleshooting
 -------------
