@@ -145,8 +145,13 @@ Are you sure you want to proceed?""" % "\n  * ".join(must_restart_wallets)
         if dlg.ShowModal() == wx.ID_YES:
             for wn in must_restart_wallets:
                 pwd = hexlify(os.urandom(32))
+                conf_base_dir = os.sep.join([home, wn])
+                conf_path = os.sep.join([home, wn, "%s.conf" % wn])
+                if not os.path.exists(conf_base_dir):
+                    os.makedirs(conf_base_dir)
+                    
                 if 'no-conf' in wallets_data[wn]:
-                    with open(os.sep.join([home, wn, "%s.conf" % wn]), "w") as f:
+                    with open(conf_path, "w") as f:
                         f.write("""rpcallowip=127.0.0.1
 rpcuser=%suser
 rpcpassword=%s
@@ -160,7 +165,7 @@ server=1
                     wallets_data[wn]['rpcport'] = default_rpcport[wn]
                     num_config += 1
                 elif 'no-rpc-data' in wallets_data[wn]:
-                    with open(os.sep.join([home, wn, "%s.conf" % wn]), "a") as f:
+                    with open(conf_path, "a") as f:
                         if wallets_data[wn]["missing-rpcuser"]:
                             f.write("\nrpcuser=%user" % wn)
                             wallets_data[wn]['rpcuser'] = "%suser" % wn
@@ -226,7 +231,8 @@ Do you want to proceed to configure the available anyways?"""
                             port=rpcport)
                             
                         try:
-                            conn.importprivkey(wif, "MERGED_NOMP_REWARD_USR_%s" % pubkey, False)
+                            #conn.importprivkey(wif, "MERGED_NOMP_REWARD_USR_%s" % pubkey, False)
+                            pass
                         finally:
                             del conn
                     except socket.error:
